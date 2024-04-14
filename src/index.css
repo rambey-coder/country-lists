@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: hsl(207, 26%, 17%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
