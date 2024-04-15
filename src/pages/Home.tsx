@@ -10,10 +10,16 @@ export interface ICountry {
   };
   name: {
     common: string;
+    official: string;
   };
+  subregion: string;
+  tld: string[];
+  currencies: Record<string, never>;
+  languages: Record<string, never>;
   population: number;
   region: string;
   capital: string;
+  borders: string[];
 }
 
 const Home = () => {

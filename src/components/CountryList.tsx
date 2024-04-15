@@ -2,6 +2,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import { BounceLoader } from "react-spinners";
 import { ICountry } from "../pages/Home";
+import { Link } from "react-router-dom";
+
 
 type CountryListProps = {
   searchQuery: string;
@@ -33,9 +35,10 @@ const CountryList: React.FC<CountryListProps> = ({
 
   const searchCountry = (countries: ICountry[]) => {
     return countries.filter((country) => {
-      return country.name.common
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
+      return (
+        country.name.common.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        country.name.official.toLowerCase().includes(searchQuery.toLowerCase())
+      );
     });
   };
 
@@ -58,8 +61,8 @@ const CountryList: React.FC<CountryListProps> = ({
         ">
           {searchCountry(countries).length > 0 ? (
             searchCountry(countries).map((country) => (
-              <div
-                className="bg-[#2b3945] max-w-[250px] w-[100%] m-auto rounded-md cursor-pointer"
+              <Link to={`/country-details/${country.name.common}`}
+                className="bg-[#2b3945] max-w-[250px] w-[100%] m-auto rounded-md cursor-pointer block"
                 key={country.name.common}>
                 <img
                   src={country.flags.png}
@@ -92,7 +95,7 @@ const CountryList: React.FC<CountryListProps> = ({
                     </span>{" "}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))
           ) : (
             <p className="text-[#fff] text-center w-full">No country found</p>
